@@ -2,11 +2,17 @@
 Entry point untuk Sistem Manajemen Perpustakaan Digital.
 
 Module ini menyediakan interface utama untuk menjalankan aplikasi.
+
+Versi: 1.0.0
 """
 
-from services import LibraryService, AuthService, ReportService
-from storage.database import Database
-from utils.helper import (
+__version__ = "1.0.0"
+__author__ = "fadhilyk"
+__description__ = "Sistem Manajemen Perpustakaan Digital"
+
+from .services import LibraryService, AuthService, ReportService
+from .storage.database import Database
+from .utils.helper import (
     clear_screen, print_header, print_separator, pause,
     get_input, get_int_input, confirm, format_table
 )
