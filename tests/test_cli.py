@@ -30,7 +30,7 @@ class TestHelperFunctions:
         
         result = format_table(data)
         
-        assert result == "No data available"
+        assert result == "Tidak ada data"
     
     def test_format_table_with_custom_headers(self):
         """Test formatting with custom headers."""

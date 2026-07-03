@@ -1,200 +1,200 @@
-# User Guide
+# Panduan Pengguna
 
 Panduan penggunaan aplikasi Sistem Manajemen Perpustakaan Digital.
 
 ---
 
-## Getting Started
+## Memulai
 
-### Running the Application
+### Menjalankan Aplikasi
 
 ```bash
 python library_system/main.py
 ```
 
-### First Run
+### Pertama Kali Menjalankan
 
 Saat pertama kali menjalankan aplikasi, Anda perlu mendaftarkan akun staff:
 
-1. Pilih opsi **2. Register New Staff** dari menu login
+1. Pilih opsi **2. Daftar Staff Baru (Pengaturan Awal)** dari menu login
 2. Isi data staff:
-   - **Staff ID**: ID unik (contoh: `P001`)
-   - **Full Name**: Nama lengkap
-   - **Contact**: Nomor telepon
+   - **ID Staff**: ID unik (contoh: `P001`)
+   - **Nama Lengkap**: Nama lengkap
+   - **Kontak**: Nomor telepon
    - **Username**: Username untuk login
    - **Password**: Password (minimal 8 karakter)
 3. Setelah registrasi berhasil, login dengan username dan password
 
 ---
 
-## Login Menu
+## Menu Login
 
 ```
 =================================================
-                  LOGIN MENU
+                  MENU LOGIN
 =================================================
 1. Login
-2. Register New Staff (First Time Setup)
-3. Exit
+2. Daftar Staff Baru (Pengaturan Awal)
+3. Keluar
 -------------------------------------------------
-Choose option:
+Pilih menu:
 ```
 
 Seluruh akses ke sistem memerlukan login terlebih dahulu.
 
 ---
 
-## Main Menu
+## Menu Utama
 
 Setelah login berhasil, menu utama akan tampil:
 
 ```
 =================================================
-                  MAIN MENU
+                  MENU UTAMA
 =================================================
-Logged in as: Admin User
+Login sebagai: Admin User
 -------------------------------------------------
-1. Book Management
-2. Member Management
-3. Borrow Book
-4. Return Book
-5. Reports
+1. Manajemen Buku
+2. Manajemen Anggota
+3. Peminjaman Buku
+4. Pengembalian Buku
+5. Laporan
 6. Logout
-7. Exit
+7. Keluar
 -------------------------------------------------
-Choose option:
+Pilih menu:
 ```
 
 ---
 
-## Book Management
+## Manajemen Buku
 
 ### Menu
 
 ```
 =================================================
-              BOOK MANAGEMENT
+               MANAJEMEN BUKU
 =================================================
-1. Add Book
-2. Edit Book
-3. Delete Book
-4. Search Book
-5. List All Books
-0. Back to Main Menu
+1. Tambah Buku
+2. Ubah Buku
+3. Hapus Buku
+4. Cari Buku
+5. Daftar Semua Buku
+0. Kembali ke Menu Utama
 -------------------------------------------------
-Choose option:
+Pilih menu:
 ```
 
-### Add Book
+### Tambah Buku
 
 Masukkan data buku yang akan ditambahkan:
 
 ```
-Book ID: B001
-Title: Python Programming
-Author: John Doe
-Publisher: Tech Publisher
-Publication Year: 2023
-Category: Programming
-Stock: 5
+ID Buku: B001
+Judul: Python Programming
+Penulis: John Doe
+Penerbit: Tech Publisher
+Tahun Terbit: 2023
+Kategori: Programming
+Stok: 5
 ```
 
 Setiap ID buku harus unik. Stok tidak boleh negatif.
 
-### Edit Book
+### Ubah Buku
 
 Masukkan ID buku yang akan diedit. Field yang dikosongkan akan menggunakan nilai lama:
 
 ```
-Book ID to edit: B001
+ID Buku yang akan diubah: B001
 
-Current: Python Programming by John Doe
-Leave blank to keep current value
+Saat ini: Python Programming oleh John Doe
+Kosongkan untuk mempertahankan nilai lama
 -------------------------------------------------
-New Title: Advanced Python
-New Author:
-New Publisher:
-New Year: 2024
-New Category:
-New Stock:
+Judul Baru: Advanced Python
+Penulis Baru:
+Penerbit Baru:
+Tahun Baru: 2024
+Kategori Baru:
+Stok Baru:
 ```
 
-### Search Book
+### Cari Buku
 
 Cari buku berdasarkan judul, penulis, atau kategori:
 
 ```
-Enter search keyword (title/author/category): Python
+Masukkan kata kunci (judul/penulis/kategori): Python
 ```
 
 Hasil pencarian case-insensitive.
 
-### Delete Book
+### Hapus Buku
 
 Hapus buku dengan konfirmasi:
 
 ```
-Book ID to delete: B001
+ID Buku yang akan dihapus: B001
 
-Book: Python Programming by John Doe
-Are you sure you want to delete this book? (y/n): y
+Buku: Python Programming oleh John Doe
+Apakah Anda yakin ingin menghapus buku ini? (y/t): y
 ```
 
 Buku yang sedang dipinjam tidak dapat dihapus.
 
 ---
 
-## Member Management
+## Manajemen Anggota
 
 ### Menu
 
 ```
 =================================================
-             MEMBER MANAGEMENT
+             MANAJEMEN ANGGOTA
 =================================================
-1. Add Member
-2. Edit Member
-3. Delete Member
-4. Search Member
-5. List All Members
-0. Back to Main Menu
+1. Tambah Anggota
+2. Ubah Anggota
+3. Hapus Anggota
+4. Cari Anggota
+5. Daftar Semua Anggota
+0. Kembali ke Menu Utama
 -------------------------------------------------
-Choose option:
+Pilih menu:
 ```
 
-### Add Member
+### Tambah Anggota
 
 ```
-Member ID: A001
-Full Name: Alice Johnson
-Contact: 081234567890
-Address: Jl. Merdeka No. 1
+ID Anggota: A001
+Nama Lengkap: Alice Johnson
+Kontak: 081234567890
+Alamat: Jl. Merdeka No. 1
 ```
 
-### Edit Member
+### Ubah Anggota
 
 ```
-Member ID to edit: A001
+ID Anggota yang akan diubah: A001
 
-Current: Alice Johnson
-Leave blank to keep current value
+Saat ini: Alice Johnson
+Kosongkan untuk mempertahankan nilai lama
 -------------------------------------------------
-New Name: Alice J.
-New Contact:
-New Address:
+Nama Baru: Alice J.
+Kontak Baru:
+Alamat Baru:
 ```
 
-### Delete Member
+### Hapus Anggota
 
 Anggota yang masih memiliki pinjaman aktif tidak dapat dihapus.
 
 ---
 
-## Borrow Book
+## Peminjaman Buku
 
-### Flow
+### Alur
 
-1. Dari menu utama, pilih **3. Borrow Book**
+1. Dari menu utama, pilih **3. Peminjaman Buku**
 2. Masukkan ID anggota dan ID buku
 3. Sistem akan memvalidasi:
    - Apakah anggota terdaftar
@@ -205,18 +205,18 @@ Anggota yang masih memiliki pinjaman aktif tidak dapat dihapus.
 
 ```
 ==================================================
-               BORROW SUCCESSFUL
+              PEMINJAMAN BERHASIL
 ==================================================
-Transaction ID: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-Member: Alice Johnson
-Book: Python Programming
-Borrow Date: 2026-07-03 14:30
-Due Date: 2026-07-10 14:30
-Remaining Stock: 4
+ID Transaksi: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+Anggota: Alice Johnson
+Buku: Python Programming
+Tanggal Pinjam: 2026-07-03 14:30
+Jatuh Tempo: 2026-07-10 14:30
+Sisa Stok: 4
 ==================================================
 ```
 
-### Business Rules
+### Aturan Bisnis
 
 - Stok buku otomatis berkurang setelah peminjaman
 - Jatuh tempo: 7 hari dari tanggal pinjam
@@ -226,71 +226,71 @@ Remaining Stock: 4
 
 ---
 
-## Return Book
+## Pengembalian Buku
 
-### Flow
+### Alur
 
-1. Dari menu utama, pilih **4. Return Book**
+1. Dari menu utama, pilih **4. Pengembalian Buku**
 2. Sistem akan menampilkan daftar peminjaman aktif
-3. Masukkan Loan ID lengkap dari transaksi yang akan dikembalikan
+3. Masukkan ID Pinjaman lengkap dari transaksi yang akan dikembalikan
 
 ### Contoh Output
 
 ```
-Active Loans:
-+-----------+-----------+----------+-----------+
-| Loan ID   | Member    | Book     | Due Date  |
-+-----------+-----------+----------+-----------+
-| a1b2c3d4… | Alice J.  | Python…  | 2026-07-10|
-+-----------+-----------+----------+-----------+
+Peminjaman Aktif:
++-------------+-----------+----------+-------------+
+| ID Pinjaman | Anggota   | Buku     | Jatuh Tempo |
++-------------+-----------+----------+-------------+
+| a1b2c3d4…   | Alice J.  | Python…  | 2026-07-10  |
++-------------+-----------+----------+-------------+
 
-Loan ID to return: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+Masukkan ID Pinjaman lengkap: a1b2c3d4-e5f6-7890-abcd-ef1234567890
 
 ==================================================
-               RETURN SUCCESSFUL
+             PENGEMBALIAN BERHASIL
 ==================================================
-Member: Alice J.
-Book: Python Programming
-Return Date: 2026-07-03 14:35
-Late Days: 0
-Fine: Rp 0
+Anggota: Alice J.
+Buku: Python Programming
+Tanggal Kembali: 2026-07-03 14:35
+Keterlambatan: 0 hari
+Denda: Rp 0
 ==================================================
 ```
 
-### Fine Calculation
+### Perhitungan Denda
 
 Jika pengembalian melebihi jatuh tempo, denda dihitung otomatis:
 
 ```
-Late Days: 3
-Fine: Rp 6,000
+Keterlambatan: 3 hari
+Denda: Rp 6,000
 ```
 
 Rumus denda: `jumlah_hari_terlambat × Rp 2.000`
 
 ---
 
-## Reports
+## Laporan
 
 ### Menu
 
 ```
 ==================================================
-                 REPORTS
+                  LAPORAN
 ==================================================
-1. All Books
-2. Available Books
-3. Borrowed Books
-4. Members
-5. Transactions
-6. Fines
-7. Statistics
-0. Back to Main Menu
+1. Semua Buku
+2. Buku Tersedia
+3. Buku Dipinjam
+4. Anggota
+5. Transaksi
+6. Denda
+7. Statistik
+0. Kembali ke Menu Utama
 -------------------------------------------------
-Choose option:
+Pilih menu:
 ```
 
-### 1. All Books
+### 1. Semua Buku
 
 Menampilkan semua buku dengan status ketersediaan.
 
@@ -298,43 +298,43 @@ Menampilkan semua buku dengan status ketersediaan.
 |---|---|---|---|---|---|---|---|
 | B001 | Python Programming | John Doe | Tech Pub | 2023 | Programming | 5 | Tersedia |
 
-### 2. Available Books
+### 2. Buku Tersedia
 
 Hanya buku dengan stok > 0.
 
-### 3. Borrowed Books
+### 3. Buku Dipinjam
 
 Buku yang sedang dipinjam beserta jumlah peminjaman aktif.
 
-### 4. Members
+### 4. Anggota
 
 Semua anggota dengan jumlah pinjaman aktif.
 
-### 5. Transactions
+### 5. Transaksi
 
 Terdapat sub-menu untuk filter:
 
-1. All Transactions
-2. Active Loans
-3. Completed Transactions
+1. Semua Transaksi
+2. Peminjaman Aktif
+3. Transaksi Selesai
 
-### 6. Fines
+### 6. Denda
 
 Laporan denda lengkap dengan total nominal.
 
-### 7. Statistics
+### 7. Statistik
 
 Ringkasan statistik perpustakaan:
 
 ```
 ==================================================
-Total Books: 10
-Total Stock: 45
-Total Members: 3
-Active Loans: 2
-Completed Transactions: 5
-Total Transactions: 7
-Total Fines: Rp 12,000
+Total Buku: 10
+Total Stok: 45
+Total Anggota: 3
+Peminjaman Aktif: 2
+Transaksi Selesai: 5
+Total Transaksi: 7
+Total Denda: Rp 12,000
 ==================================================
 ```
 
@@ -344,9 +344,9 @@ Total Fines: Rp 12,000
 
 Pilih **6. Logout** dari menu utama untuk keluar dari sesi. Anda akan kembali ke menu login.
 
-## Exit
+## Keluar
 
-Pilih **7. Exit** untuk menutup aplikasi sepenuhnya.
+Pilih **7. Keluar** untuk menutup aplikasi sepenuhnya.
 
 ---
 
@@ -354,5 +354,5 @@ Pilih **7. Exit** untuk menutup aplikasi sepenuhnya.
 
 - Gunakan ID yang konsisten dan mudah diingat (contoh: `B001`, `A001`, `P001`)
 - Periksa stok buku sebelum melakukan peminjaman
-- Gunakan fitur search untuk mencari buku/anggota jika jumlahnya sudah banyak
-- Cek laporan fine secara rutin untuk memonitor anggota yang terlambat
+- Gunakan fitur cari untuk mencari buku/anggota jika jumlahnya sudah banyak
+- Cek laporan denda secara rutin untuk memonitor anggota yang terlambat

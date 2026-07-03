@@ -32,7 +32,7 @@ def print_separator() -> None:
 
 def pause() -> None:
     """Pause and wait for user input."""
-    input("\nPress Enter to continue...")
+    input("\nTekan Enter untuk melanjutkan...")
 
 
 def get_input(prompt: str, default: str = None) -> str:
@@ -84,8 +84,8 @@ def confirm(prompt: str) -> bool:
     Returns:
         True if user confirms, False otherwise
     """
-    response = input(f"{prompt} (y/n): ").strip().lower()
-    return response in ['y', 'yes']
+    response = input(f"{prompt} (y/t): ").strip().lower()
+    return response in ['y', 'yes', 'ya', 't']
 
 
 def format_table(data: list[dict[str, Any]], headers: list[str] = None) -> str:
@@ -100,7 +100,7 @@ def format_table(data: list[dict[str, Any]], headers: list[str] = None) -> str:
         Formatted table string
     """
     if not data:
-        return "No data available"
+        return "Tidak ada data"
     
     try:
         from tabulate import tabulate

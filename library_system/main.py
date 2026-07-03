@@ -32,8 +32,8 @@ class LibraryApp:
     def run(self) -> None:
         """Run the main application loop."""
         clear_screen()
-        print_header("DIGITAL LIBRARY MANAGEMENT SYSTEM")
-        print("\nWelcome to the Library Management System")
+        print_header("SISTEM MANAJEMEN PERPUSTAKAAN DIGITAL")
+        print("\nSelamat datang di Sistem Manajemen Perpustakaan")
         
         while self.running:
             if not self.auth_service.is_logged_in():
@@ -43,14 +43,14 @@ class LibraryApp:
     
     def show_login_menu(self) -> None:
         """Display login menu."""
-        print_header("LOGIN MENU")
+        print_header("MENU LOGIN")
         print("1. Login")
-        print("2. Register New Staff (First Time Setup)")
-        print("3. Exit")
+        print("2. Daftar Staff Baru (Pengaturan Awal)")
+        print("3. Keluar")
         print_separator()
         
         try:
-            choice = get_input("Choose option")
+            choice = get_input("Pilih menu")
             
             if choice == "1":
                 self.handle_login()
@@ -58,9 +58,9 @@ class LibraryApp:
                 self.handle_register_staff()
             elif choice == "3":
                 self.running = False
-                print("\nThank you for using Library Management System!")
+                print("\nTerima kasih telah menggunakan Sistem Manajemen Perpustakaan!")
             else:
-                print("\nInvalid choice!")
+                print("\nPilihan tidak valid!")
                 pause()
         except Exception as e:
             print(f"\nError: {e}")
@@ -69,57 +69,57 @@ class LibraryApp:
     def handle_login(self) -> None:
         """Handle staff login."""
         clear_screen()
-        print_header("STAFF LOGIN")
+        print_header("LOGIN STAFF")
         
         try:
             username = get_input("Username")
             password = get_input("Password")
             
             user = self.auth_service.login(username, password)
-            print(f"\nLogin successful! Welcome, {user.nama}")
+            print(f"\nLogin berhasil! Selamat datang, {user.nama}")
             pause()
             clear_screen()
         except Exception as e:
-            print(f"\nLogin failed: {e}")
+            print(f"\nLogin gagal: {e}")
             pause()
     
     def handle_register_staff(self) -> None:
         """Handle staff registration."""
         clear_screen()
-        print_header("REGISTER NEW STAFF")
+        print_header("DAFTAR STAFF BARU")
         
         try:
-            id = get_input("Staff ID")
-            nama = get_input("Full Name")
-            kontak = get_input("Contact")
+            id = get_input("ID Staff")
+            nama = get_input("Nama Lengkap")
+            kontak = get_input("Kontak")
             username = get_input("Username")
-            password = get_input("Password (min 8 characters)")
+            password = get_input("Password (min 8 karakter)")
             
             staff = self.auth_service.register_petugas(id, nama, kontak, username, password)
-            print(f"\nStaff registered successfully: {staff.nama}")
+            print(f"\nStaff berhasil didaftarkan: {staff.nama}")
             pause()
         except Exception as e:
-            print(f"\nRegistration failed: {e}")
+            print(f"\nPendaftaran gagal: {e}")
             pause()
     
     def show_main_menu(self) -> None:
         """Display main menu after login."""
         clear_screen()
         user = self.auth_service.get_current_user()
-        print_header("MAIN MENU")
-        print(f"Logged in as: {user.nama}")
+        print_header("MENU UTAMA")
+        print(f"Login sebagai: {user.nama}")
         print_separator()
-        print("1. Book Management")
-        print("2. Member Management")
-        print("3. Borrow Book")
-        print("4. Return Book")
-        print("5. Reports")
+        print("1. Manajemen Buku")
+        print("2. Manajemen Anggota")
+        print("3. Peminjaman Buku")
+        print("4. Pengembalian Buku")
+        print("5. Laporan")
         print("6. Logout")
-        print("7. Exit")
+        print("7. Keluar")
         print_separator()
         
         try:
-            choice = get_input("Choose option")
+            choice = get_input("Pilih menu")
             
             if choice == "1":
                 self.show_book_menu()
@@ -135,9 +135,9 @@ class LibraryApp:
                 self.handle_logout()
             elif choice == "7":
                 self.running = False
-                print("\nThank you for using Library Management System!")
+                print("\nTerima kasih telah menggunakan Sistem Manajemen Perpustakaan!")
             else:
-                print("\nInvalid choice!")
+                print("\nPilihan tidak valid!")
                 pause()
         except Exception as e:
             print(f"\nError: {e}")
@@ -147,17 +147,17 @@ class LibraryApp:
         """Display book management menu."""
         while True:
             clear_screen()
-            print_header("BOOK MANAGEMENT")
-            print("1. Add Book")
-            print("2. Edit Book")
-            print("3. Delete Book")
-            print("4. Search Book")
-            print("5. List All Books")
-            print("0. Back to Main Menu")
+            print_header("MANAJEMEN BUKU")
+            print("1. Tambah Buku")
+            print("2. Ubah Buku")
+            print("3. Hapus Buku")
+            print("4. Cari Buku")
+            print("5. Daftar Semua Buku")
+            print("0. Kembali ke Menu Utama")
             print_separator()
             
             try:
-                choice = get_input("Choose option")
+                choice = get_input("Pilih menu")
                 
                 if choice == "1":
                     self.handle_add_book()
@@ -172,7 +172,7 @@ class LibraryApp:
                 elif choice == "0":
                     break
                 else:
-                    print("\nInvalid choice!")
+                    print("\nPilihan tidak valid!")
                     pause()
             except Exception as e:
                 print(f"\nError: {e}")
@@ -181,89 +181,89 @@ class LibraryApp:
     def handle_add_book(self) -> None:
         """Handle adding a new book."""
         clear_screen()
-        print_header("ADD NEW BOOK")
+        print_header("TAMBAH BUKU BARU")
         
         try:
-            id = get_input("Book ID")
-            judul = get_input("Title")
-            penulis = get_input("Author")
-            penerbit = get_input("Publisher")
-            tahun = get_int_input("Publication Year")
-            kategori = get_input("Category")
-            stok = get_int_input("Stock")
+            id = get_input("ID Buku")
+            judul = get_input("Judul")
+            penulis = get_input("Penulis")
+            penerbit = get_input("Penerbit")
+            tahun = get_int_input("Tahun Terbit")
+            kategori = get_input("Kategori")
+            stok = get_int_input("Stok")
             
             buku = self.library_service.tambah_buku(id, judul, penulis, penerbit, tahun, kategori, stok)
-            print(f"\nBook added successfully: {buku.judul}")
+            print(f"\nBuku berhasil ditambahkan: {buku.judul}")
             pause()
         except Exception as e:
-            print(f"\nFailed to add book: {e}")
+            print(f"\nGagal menambahkan buku: {e}")
             pause()
     
     def handle_edit_book(self) -> None:
         """Handle editing a book."""
         clear_screen()
-        print_header("EDIT BOOK")
+        print_header("UBAH BUKU")
         
         try:
-            id = get_input("Book ID to edit")
+            id = get_input("ID Buku yang akan diubah")
             buku = self.library_service._find_buku_by_id(id)
             
             if not buku:
-                print(f"\nBook with ID '{id}' not found!")
+                print(f"\nBuku dengan ID '{id}' tidak ditemukan!")
                 pause()
                 return
             
-            print(f"\nCurrent: {buku.judul} by {buku.penulis}")
-            print("Leave blank to keep current value")
+            print(f"\nSaat ini: {buku.judul} oleh {buku.penulis}")
+            print("Kosongkan untuk mempertahankan nilai lama")
             print_separator()
             
-            judul = get_input("New Title", buku.judul)
-            penulis = get_input("New Author", buku.penulis)
-            penerbit = get_input("New Publisher", buku.penerbit)
-            tahun = get_int_input("New Year", buku.tahun)
-            kategori = get_input("New Category", buku.kategori)
-            stok = get_int_input("New Stock", buku.stok)
+            judul = get_input("Judul Baru", buku.judul)
+            penulis = get_input("Penulis Baru", buku.penulis)
+            penerbit = get_input("Penerbit Baru", buku.penerbit)
+            tahun = get_int_input("Tahun Baru", buku.tahun)
+            kategori = get_input("Kategori Baru", buku.kategori)
+            stok = get_int_input("Stok Baru", buku.stok)
             
             self.library_service.edit_buku(id, judul, penulis, penerbit, tahun, kategori, stok)
-            print("\nBook updated successfully!")
+            print("\nBuku berhasil diperbarui!")
             pause()
         except Exception as e:
-            print(f"\nFailed to edit book: {e}")
+            print(f"\nGagal mengubah buku: {e}")
             pause()
     
     def handle_delete_book(self) -> None:
         """Handle deleting a book."""
         clear_screen()
-        print_header("DELETE BOOK")
+        print_header("HAPUS BUKU")
         
         try:
-            id = get_input("Book ID to delete")
+            id = get_input("ID Buku yang akan dihapus")
             buku = self.library_service._find_buku_by_id(id)
             
             if not buku:
-                print(f"\nBook with ID '{id}' not found!")
+                print(f"\nBuku dengan ID '{id}' tidak ditemukan!")
                 pause()
                 return
             
-            print(f"\nBook: {buku.judul} by {buku.penulis}")
+            print(f"\nBuku: {buku.judul} oleh {buku.penulis}")
             
-            if confirm("Are you sure you want to delete this book?"):
+            if confirm("Apakah Anda yakin ingin menghapus buku ini?"):
                 self.library_service.hapus_buku(id)
-                print("\nBook deleted successfully!")
+                print("\nBuku berhasil dihapus!")
             else:
-                print("\nDeletion cancelled.")
+                print("\nPenghapusan dibatalkan.")
             pause()
         except Exception as e:
-            print(f"\nFailed to delete book: {e}")
+            print(f"\nGagal menghapus buku: {e}")
             pause()
     
     def handle_search_book(self) -> None:
         """Handle searching books."""
         clear_screen()
-        print_header("SEARCH BOOK")
+        print_header("CARI BUKU")
         
         try:
-            keyword = get_input("Enter search keyword (title/author/category)")
+            keyword = get_input("Masukkan kata kunci (judul/penulis/kategori)")
             results = self.library_service.cari_buku(keyword)
             
             if results:
@@ -271,25 +271,25 @@ class LibraryApp:
                 for buku in results:
                     data.append({
                         "ID": buku.id,
-                        "Title": buku.judul,
-                        "Author": buku.penulis,
-                        "Publisher": buku.penerbit,
-                        "Year": buku.tahun,
-                        "Category": buku.kategori,
-                        "Stock": buku.stok
+                        "Judul": buku.judul,
+                        "Penulis": buku.penulis,
+                        "Penerbit": buku.penerbit,
+                        "Tahun": buku.tahun,
+                        "Kategori": buku.kategori,
+                        "Stok": buku.stok
                     })
                 print("\n" + format_table(data))
             else:
-                print("\nNo books found!")
+                print("\nTidak ada buku ditemukan!")
             pause()
         except Exception as e:
-            print(f"\nSearch failed: {e}")
+            print(f"\nPencarian gagal: {e}")
             pause()
     
     def handle_list_books(self) -> None:
         """Handle listing all books."""
         clear_screen()
-        print_header("ALL BOOKS")
+        print_header("SEMUA BUKU")
         
         try:
             books = self.library_service.daftar_buku()
@@ -299,35 +299,35 @@ class LibraryApp:
                 for buku in books:
                     data.append({
                         "ID": buku.id,
-                        "Title": buku.judul,
-                        "Author": buku.penulis,
-                        "Category": buku.kategori,
-                        "Stock": buku.stok,
-                        "Status": "Available" if buku.tersedia() else "Out of Stock"
+                        "Judul": buku.judul,
+                        "Penulis": buku.penulis,
+                        "Kategori": buku.kategori,
+                        "Stok": buku.stok,
+                        "Status": "Tersedia" if buku.tersedia() else "Habis"
                     })
                 print("\n" + format_table(data))
             else:
-                print("\nNo books in library!")
+                print("\nTidak ada buku di perpustakaan!")
             pause()
         except Exception as e:
-            print(f"\nFailed to list books: {e}")
+            print(f"\nGagal menampilkan daftar buku: {e}")
             pause()
     
     def show_member_menu(self) -> None:
         """Display member management menu."""
         while True:
             clear_screen()
-            print_header("MEMBER MANAGEMENT")
-            print("1. Add Member")
-            print("2. Edit Member")
-            print("3. Delete Member")
-            print("4. Search Member")
-            print("5. List All Members")
-            print("0. Back to Main Menu")
+            print_header("MANAJEMEN ANGGOTA")
+            print("1. Tambah Anggota")
+            print("2. Ubah Anggota")
+            print("3. Hapus Anggota")
+            print("4. Cari Anggota")
+            print("5. Daftar Semua Anggota")
+            print("0. Kembali ke Menu Utama")
             print_separator()
             
             try:
-                choice = get_input("Choose option")
+                choice = get_input("Pilih menu")
                 
                 if choice == "1":
                     self.handle_add_member()
@@ -342,7 +342,7 @@ class LibraryApp:
                 elif choice == "0":
                     break
                 else:
-                    print("\nInvalid choice!")
+                    print("\nPilihan tidak valid!")
                     pause()
             except Exception as e:
                 print(f"\nError: {e}")
@@ -351,84 +351,84 @@ class LibraryApp:
     def handle_add_member(self) -> None:
         """Handle adding a new member."""
         clear_screen()
-        print_header("ADD NEW MEMBER")
+        print_header("TAMBAH ANGGOTA BARU")
         
         try:
-            id = get_input("Member ID")
-            nama = get_input("Full Name")
-            kontak = get_input("Contact")
-            alamat = get_input("Address")
+            id = get_input("ID Anggota")
+            nama = get_input("Nama Lengkap")
+            kontak = get_input("Kontak")
+            alamat = get_input("Alamat")
             
             anggota = self.library_service.tambah_anggota(id, nama, kontak, alamat)
-            print(f"\nMember added successfully: {anggota.nama}")
+            print(f"\nAnggota berhasil ditambahkan: {anggota.nama}")
             pause()
         except Exception as e:
-            print(f"\nFailed to add member: {e}")
+            print(f"\nGagal menambahkan anggota: {e}")
             pause()
     
     def handle_edit_member(self) -> None:
         """Handle editing a member."""
         clear_screen()
-        print_header("EDIT MEMBER")
+        print_header("UBAH ANGGOTA")
         
         try:
-            id = get_input("Member ID to edit")
+            id = get_input("ID Anggota yang akan diubah")
             anggota = self.library_service._find_anggota_by_id(id)
             
             if not anggota:
-                print(f"\nMember with ID '{id}' not found!")
+                print(f"\nAnggota dengan ID '{id}' tidak ditemukan!")
                 pause()
                 return
             
-            print(f"\nCurrent: {anggota.nama}")
-            print("Leave blank to keep current value")
+            print(f"\nSaat ini: {anggota.nama}")
+            print("Kosongkan untuk mempertahankan nilai lama")
             print_separator()
             
-            nama = get_input("New Name", anggota.nama)
-            kontak = get_input("New Contact", anggota.kontak)
-            alamat = get_input("New Address", anggota.alamat)
+            nama = get_input("Nama Baru", anggota.nama)
+            kontak = get_input("Kontak Baru", anggota.kontak)
+            alamat = get_input("Alamat Baru", anggota.alamat)
             
             self.library_service.edit_anggota(id, nama, kontak, alamat)
-            print("\nMember updated successfully!")
+            print("\nAnggota berhasil diperbarui!")
             pause()
         except Exception as e:
-            print(f"\nFailed to edit member: {e}")
+            print(f"\nGagal mengubah anggota: {e}")
             pause()
     
     def handle_delete_member(self) -> None:
         """Handle deleting a member."""
         clear_screen()
-        print_header("DELETE MEMBER")
+        print_header("HAPUS ANGGOTA")
         
         try:
-            id = get_input("Member ID to delete")
+            id = get_input("ID Anggota yang akan dihapus")
             anggota = self.library_service._find_anggota_by_id(id)
             
             if not anggota:
-                print(f"\nMember with ID '{id}' not found!")
+                print(f"\nAnggota dengan ID '{id}' tidak ditemukan!")
                 pause()
                 return
             
-            print(f"\nMember: {anggota.nama}")
-            print(f"Active Loans: {anggota.jumlah_pinjaman()}")
+            print(f"\nAnggota: {anggota.nama}")
+            print(f"Pinjaman Aktif: {anggota.jumlah_pinjaman()}")
             
-            if confirm("Are you sure you want to delete this member?"):
+            if confirm("Apakah Anda yakin ingin menghapus anggota ini?"):
                 self.library_service.hapus_anggota(id)
-                print("\nMember deleted successfully!")
+                print("\nAnggota berhasil dihapus!")
             else:
-                print("\nDeletion cancelled.")
+                print("\nPenghapusan dibatalkan.")
             pause()
         except Exception as e:
-            print(f"\nFailed to delete member: {e}")
+            print(f"\nGagal menghapus anggota: {e}")
             pause()
     
     def handle_search_member(self) -> None:
         """Handle searching members."""
         clear_screen()
-        print_header("SEARCH MEMBER")
+        print_header("CARI ANGGOTA")
         
         try:
-            keyword = get_input("Enter search keyword (name/contact)")
+            keyword = get_input("Masukkan kata kunci (nama/kontak)")
             results = self.library_service.cari_anggota(keyword)
             
             if results:
@@ -436,23 +436,23 @@ class LibraryApp:
                 for anggota in results:
                     data.append({
                         "ID": anggota.id,
-                        "Name": anggota.nama,
-                        "Contact": anggota.kontak,
-                        "Address": anggota.alamat,
-                        "Active Loans": anggota.jumlah_pinjaman()
+                        "Nama": anggota.nama,
+                        "Kontak": anggota.kontak,
+                        "Alamat": anggota.alamat,
+                        "Pinjaman Aktif": anggota.jumlah_pinjaman()
                     })
                 print("\n" + format_table(data))
             else:
-                print("\nNo members found!")
+                print("\nTidak ada anggota ditemukan!")
             pause()
         except Exception as e:
-            print(f"\nSearch failed: {e}")
+            print(f"\nPencarian gagal: {e}")
             pause()
     
     def handle_list_members(self) -> None:
         """Handle listing all members."""
         clear_screen()
-        print_header("ALL MEMBERS")
+        print_header("SEMUA ANGGOTA")
         
         try:
             members = self.library_service.daftar_anggota()
@@ -462,27 +462,27 @@ class LibraryApp:
                 for anggota in members:
                     data.append({
                         "ID": anggota.id,
-                        "Name": anggota.nama,
-                        "Contact": anggota.kontak,
-                        "Address": anggota.alamat,
-                        "Active Loans": anggota.jumlah_pinjaman()
+                        "Nama": anggota.nama,
+                        "Kontak": anggota.kontak,
+                        "Alamat": anggota.alamat,
+                        "Pinjaman Aktif": anggota.jumlah_pinjaman()
                     })
                 print("\n" + format_table(data))
             else:
-                print("\nNo members registered!")
+                print("\nTidak ada anggota terdaftar!")
             pause()
         except Exception as e:
-            print(f"\nFailed to list members: {e}")
+            print(f"\nGagal menampilkan daftar anggota: {e}")
             pause()
     
     def handle_borrow_book(self) -> None:
         """Handle borrowing a book."""
         clear_screen()
-        print_header("BORROW BOOK")
+        print_header("PEMINJAMAN BUKU")
         
         try:
-            anggota_id = get_input("Member ID")
-            buku_id = get_input("Book ID")
+            anggota_id = get_input("ID Anggota")
+            buku_id = get_input("ID Buku")
             
             peminjaman = self.library_service.pinjam_buku(anggota_id, buku_id)
             
@@ -490,31 +490,31 @@ class LibraryApp:
             buku = self.library_service._find_buku_by_id(buku_id)
             
             print("\n" + "=" * 50)
-            print("BORROW SUCCESSFUL")
+            print("PEMINJAMAN BERHASIL")
             print("=" * 50)
-            print(f"Transaction ID: {peminjaman.id}")
-            print(f"Member: {anggota.nama}")
-            print(f"Book: {buku.judul}")
-            print(f"Borrow Date: {peminjaman.tanggal_pinjam.strftime('%Y-%m-%d %H:%M')}")
-            print(f"Due Date: {peminjaman.jatuh_tempo.strftime('%Y-%m-%d %H:%M')}")
-            print(f"Remaining Stock: {buku.stok}")
+            print(f"ID Transaksi: {peminjaman.id}")
+            print(f"Anggota: {anggota.nama}")
+            print(f"Buku: {buku.judul}")
+            print(f"Tanggal Pinjam: {peminjaman.tanggal_pinjam.strftime('%Y-%m-%d %H:%M')}")
+            print(f"Jatuh Tempo: {peminjaman.jatuh_tempo.strftime('%Y-%m-%d %H:%M')}")
+            print(f"Sisa Stok: {buku.stok}")
             print("=" * 50)
             pause()
         except Exception as e:
-            print(f"\nBorrow failed: {e}")
+            print(f"\nPeminjaman gagal: {e}")
             pause()
     
     def handle_return_book(self) -> None:
         """Handle returning a book."""
         clear_screen()
-        print_header("RETURN BOOK")
+        print_header("PENGEMBALIAN BUKU")
         
         try:
-            print("Active Loans:")
+            print("Peminjaman Aktif:")
             peminjaman_aktif = self.library_service.daftar_peminjaman(status="aktif")
             
             if not peminjaman_aktif:
-                print("\nNo active loans!")
+                print("\nTidak ada peminjaman aktif!")
                 pause()
                 return
             
@@ -523,15 +523,15 @@ class LibraryApp:
                 anggota = self.library_service._find_anggota_by_id(p.anggota_id)
                 buku = self.library_service._find_buku_by_id(p.buku_id)
                 data.append({
-                    "Loan ID": p.id[:8] + "...",
-                    "Member": anggota.nama if anggota else "Unknown",
-                    "Book": buku.judul if buku else "Unknown",
-                    "Due Date": p.jatuh_tempo.strftime('%Y-%m-%d')
+                    "ID Pinjaman": p.id[:8] + "...",
+                    "Anggota": anggota.nama if anggota else "Tidak Diketahui",
+                    "Buku": buku.judul if buku else "Tidak Diketahui",
+                    "Jatuh Tempo": p.jatuh_tempo.strftime('%Y-%m-%d')
                 })
             print("\n" + format_table(data))
             
             print_separator()
-            peminjaman_id = get_input("Enter full Loan ID")
+            peminjaman_id = get_input("Masukkan ID Pinjaman lengkap")
             
             peminjaman = self.library_service.kembalikan_buku(peminjaman_id)
             
@@ -539,36 +539,36 @@ class LibraryApp:
             buku = self.library_service._find_buku_by_id(peminjaman.buku_id)
             
             print("\n" + "=" * 50)
-            print("RETURN SUCCESSFUL")
+            print("PENGEMBALIAN BERHASIL")
             print("=" * 50)
-            print(f"Member: {anggota.nama}")
-            print(f"Book: {buku.judul}")
-            print(f"Return Date: {peminjaman.tanggal_kembali.strftime('%Y-%m-%d %H:%M')}")
-            print(f"Late Days: {peminjaman.terlambat()}")
-            print(f"Fine: Rp {peminjaman.denda.nominal:,}")
+            print(f"Anggota: {anggota.nama}")
+            print(f"Buku: {buku.judul}")
+            print(f"Tanggal Kembali: {peminjaman.tanggal_kembali.strftime('%Y-%m-%d %H:%M')}")
+            print(f"Keterlambatan: {peminjaman.terlambat()} hari")
+            print(f"Denda: Rp {peminjaman.denda.nominal:,}")
             print("=" * 50)
             pause()
         except Exception as e:
-            print(f"\nReturn failed: {e}")
+            print(f"\nPengembalian gagal: {e}")
             pause()
     
     def show_report_menu(self) -> None:
         """Display report menu."""
         while True:
             clear_screen()
-            print_header("REPORTS")
-            print("1. All Books")
-            print("2. Available Books")
-            print("3. Borrowed Books")
-            print("4. Members")
-            print("5. Transactions")
-            print("6. Fines")
-            print("7. Statistics")
-            print("0. Back to Main Menu")
+            print_header("LAPORAN")
+            print("1. Semua Buku")
+            print("2. Buku Tersedia")
+            print("3. Buku Dipinjam")
+            print("4. Anggota")
+            print("5. Transaksi")
+            print("6. Denda")
+            print("7. Statistik")
+            print("0. Kembali ke Menu Utama")
             print_separator()
             
             try:
-                choice = get_input("Choose option")
+                choice = get_input("Pilih menu")
                 
                 if choice == "1":
                     self.show_all_books_report()
@@ -587,7 +587,7 @@ class LibraryApp:
                 elif choice == "0":
                     break
                 else:
-                    print("\nInvalid choice!")
+                    print("\nPilihan tidak valid!")
                     pause()
             except Exception as e:
                 print(f"\nError: {e}")
@@ -596,78 +596,78 @@ class LibraryApp:
     def show_all_books_report(self) -> None:
         """Show all books report."""
         clear_screen()
-        print_header("REPORT: ALL BOOKS")
+        print_header("LAPORAN: SEMUA BUKU")
         
         try:
             laporan = self.report_service.laporan_semua_buku()
             if laporan:
                 print("\n" + format_table(laporan))
             else:
-                print("\nNo books in library!")
+                print("\nTidak ada buku di perpustakaan!")
             pause()
         except Exception as e:
-            print(f"\nFailed to generate report: {e}")
+            print(f"\nGagal membuat laporan: {e}")
             pause()
     
     def show_available_books_report(self) -> None:
         """Show available books report."""
         clear_screen()
-        print_header("REPORT: AVAILABLE BOOKS")
+        print_header("LAPORAN: BUKU TERSEDIA")
         
         try:
             laporan = self.report_service.laporan_buku_tersedia()
             if laporan:
                 print("\n" + format_table(laporan))
             else:
-                print("\nNo available books!")
+                print("\nTidak ada buku tersedia!")
             pause()
         except Exception as e:
-            print(f"\nFailed to generate report: {e}")
+            print(f"\nGagal membuat laporan: {e}")
             pause()
     
     def show_borrowed_books_report(self) -> None:
         """Show borrowed books report."""
         clear_screen()
-        print_header("REPORT: BORROWED BOOKS")
+        print_header("LAPORAN: BUKU DIPINJAM")
         
         try:
             laporan = self.report_service.laporan_buku_dipinjam()
             if laporan:
                 print("\n" + format_table(laporan))
             else:
-                print("\nNo borrowed books!")
+                print("\nTidak ada buku dipinjam!")
             pause()
         except Exception as e:
-            print(f"\nFailed to generate report: {e}")
+            print(f"\nGagal membuat laporan: {e}")
             pause()
     
     def show_members_report(self) -> None:
         """Show members report."""
         clear_screen()
-        print_header("REPORT: MEMBERS")
+        print_header("LAPORAN: ANGGOTA")
         
         try:
             laporan = self.report_service.laporan_anggota()
             if laporan:
                 print("\n" + format_table(laporan))
             else:
-                print("\nNo members registered!")
+                print("\nTidak ada anggota terdaftar!")
             pause()
         except Exception as e:
-            print(f"\nFailed to generate report: {e}")
+            print(f"\nGagal membuat laporan: {e}")
             pause()
     
     def show_transactions_report(self) -> None:
         """Show transactions report."""
         clear_screen()
-        print_header("REPORT: TRANSACTIONS")
-        print("\n1. All Transactions")
-        print("2. Active Loans")
-        print("3. Completed Transactions")
+        print_header("LAPORAN: TRANSAKSI")
+        print("\n1. Semua Transaksi")
+        print("2. Peminjaman Aktif")
+        print("3. Transaksi Selesai")
         print_separator()
         
         try:
-            choice = get_input("Choose option")
+            choice = get_input("Pilih menu")
             
             if choice == "1":
                 laporan = self.report_service.laporan_transaksi()
@@ -676,68 +676,68 @@ class LibraryApp:
             elif choice == "3":
                 laporan = self.report_service.laporan_transaksi(status="selesai")
             else:
-                print("\nInvalid choice!")
+                print("\nPilihan tidak valid!")
                 pause()
                 return
             
             if laporan:
                 print("\n" + format_table(laporan))
             else:
-                print("\nNo transactions!")
+                print("\nTidak ada transaksi!")
             pause()
         except Exception as e:
-            print(f"\nFailed to generate report: {e}")
+            print(f"\nGagal membuat laporan: {e}")
             pause()
     
     def show_fines_report(self) -> None:
         """Show fines report."""
         clear_screen()
-        print_header("REPORT: FINES")
+        print_header("LAPORAN: DENDA")
         
         try:
             laporan = self.report_service.laporan_denda()
             if laporan:
                 print("\n" + format_table(laporan))
                 total = sum(item['nominal_denda'] for item in laporan)
-                print(f"\nTotal Fines: Rp {total:,}")
+                print(f"\nTotal Denda: Rp {total:,}")
             else:
-                print("\nNo fines recorded!")
+                print("\nTidak ada denda tercatat!")
             pause()
         except Exception as e:
-            print(f"\nFailed to generate report: {e}")
+            print(f"\nGagal membuat laporan: {e}")
             pause()
     
     def show_statistics_report(self) -> None:
         """Show library statistics."""
         clear_screen()
-        print_header("REPORT: LIBRARY STATISTICS")
+        print_header("LAPORAN: STATISTIK PERPUSTAKAAN")
         
         try:
             stats = self.report_service.statistik_perpustakaan()
             
             print("\n" + "=" * 50)
-            print(f"Total Books: {stats['total_buku']}")
-            print(f"Total Stock: {stats['total_stok']}")
-            print(f"Total Members: {stats['total_anggota']}")
-            print(f"Active Loans: {stats['total_peminjaman_aktif']}")
-            print(f"Completed Transactions: {stats['total_peminjaman_selesai']}")
-            print(f"Total Transactions: {stats['total_peminjaman']}")
-            print(f"Total Fines: Rp {stats['total_denda']:,}")
+            print(f"Total Buku: {stats['total_buku']}")
+            print(f"Total Stok: {stats['total_stok']}")
+            print(f"Total Anggota: {stats['total_anggota']}")
+            print(f"Peminjaman Aktif: {stats['total_peminjaman_aktif']}")
+            print(f"Transaksi Selesai: {stats['total_peminjaman_selesai']}")
+            print(f"Total Transaksi: {stats['total_peminjaman']}")
+            print(f"Total Denda: Rp {stats['total_denda']:,}")
             print("=" * 50)
             pause()
         except Exception as e:
-            print(f"\nFailed to generate report: {e}")
+            print(f"\nGagal membuat laporan: {e}")
             pause()
     
     def handle_logout(self) -> None:
         """Handle user logout."""
         try:
             self.auth_service.logout()
-            print("\nLogged out successfully!")
+            print("\nLogout berhasil!")
             pause()
             clear_screen()
         except Exception as e:
-            print(f"\nLogout failed: {e}")
+            print(f"\nLogout gagal: {e}")
             pause()
 
 

@@ -1,35 +1,35 @@
-# Digital Library Management System
+# Sistem Manajemen Perpustakaan Digital
 
 Sistem Manajemen Perpustakaan Digital berbasis Python CLI dengan arsitektur berlapis dan prinsip Object-Oriented Programming.
 
-## Description
+## Deskripsi
 
 Aplikasi ini dirancang untuk mengelola seluruh aktivitas perpustakaan secara digital — mulai dari manajemen koleksi buku, pendataan anggota, transaksi peminjaman, hingga pelaporan. Data disimpan secara persisten menggunakan format JSON, dan sistem dibangun dengan prinsip Clean Architecture untuk menjaga separation of concerns dan kemudahan maintenance.
 
-## Features
+## Fitur
 
-- **Authentication System** — Staff login/logout dengan password ter-hash (SHA256)
-- **Book Management** — CRUD buku lengkap dengan tracking stok otomatis
-- **Member Management** — CRUD anggota dengan limit peminjaman
-- **Borrow/Return Transactions** — Peminjaman dan pengembalian dengan perhitungan denda otomatis
-- **Reports** — 7 jenis laporan (buku, anggota, transaksi, denda, statistik)
-- **Persistent Storage** — Data otomatis tersimpan ke JSON dan survive restart
-- **Input Validation** — Validasi komprehensif di semua level
+- **Sistem Autentikasi** — Login/logout staff dengan password ter-hash (SHA256)
+- **Manajemen Buku** — CRUD buku lengkap dengan tracking stok otomatis
+- **Manajemen Anggota** — CRUD anggota dengan limit peminjaman
+- **Transaksi Peminjaman/Pengembalian** — Peminjaman dan pengembalian dengan perhitungan denda otomatis
+- **Laporan** — 7 jenis laporan (buku, anggota, transaksi, denda, statistik)
+- **Penyimpanan Persisten** — Data otomatis tersimpan ke JSON dan survive restart
+- **Validasi Input** — Validasi komprehensif di semua level
 - **Custom Exceptions** — Exception hierarchy untuk error handling yang jelas
 - **Logging** — Rotating file log dengan format terstruktur
-- **Comprehensive Testing** — 128+ unit/integration tests dengan pytest
+- **Pengujian Komprehensif** — 128+ unit/integration tests dengan pytest
 
 ## Technology Stack
 
-| Technology | Purpose |
+| Teknologi | Tujuan |
 |---|---|
 | Python 3.12+ | Core language |
 | Standard Library | `datetime`, `json`, `pathlib`, `hashlib`, `uuid`, `abc`, `typing`, `dataclasses` |
 | pytest | Testing framework |
 | GitHub Actions | CI/CD pipeline |
-| tabulate (optional) | CLI table formatting |
+| tabulate (opsional) | CLI table formatting |
 
-## Architecture Overview
+## Gambaran Arsitektur
 
 ```mermaid
 graph TD
@@ -49,20 +49,20 @@ Aplikasi mengimplementasikan **Layered Architecture** dengan 3 layer utama:
 2. **Service Layer** — Business logic (services/)
 3. **Data/Repository Layer** — Storage operations (storage/)
 
-## Folder Structure
+## Struktur Folder
 
 ```
 .
 ├── .github/
 │   └── workflows/
 │       └── python-ci.yml          # CI/CD pipeline
-├── docs/                           # Documentation
+├── docs/                           # Dokumentasi
 │   ├── Architecture.md
 │   ├── DeveloperGuide.md
 │   ├── Testing.md
 │   └── UserGuide.md
-├── logs/                           # Application logs
-├── library_system/                 # Main application package
+├── logs/                           # Log aplikasi
+├── library_system/                 # Paket aplikasi utama
 │   ├── main.py                    # Entry point (CLI)
 │   ├── __init__.py
 │   ├── models/                    # Domain models
@@ -89,7 +89,7 @@ Aplikasi mengimplementasikan **Layered Architecture** dengan 3 layer utama:
 │   ├── exceptions/                # Custom exceptions
 │   │   ├── __init__.py
 │   │   └── library_exceptions.py
-│   └── data/                      # JSON storage
+│   └── data/                      # Penyimpanan JSON
 │       ├── buku.json
 │       ├── anggota.json
 │       ├── transaksi.json
@@ -108,58 +108,58 @@ Aplikasi mengimplementasikan **Layered Architecture** dengan 3 layer utama:
 └── .gitignore                      # Git ignore rules
 ```
 
-## Installation
+## Instalasi
 
-### Prerequisites
+### Prasyarat
 
-- Python 3.12 or higher
+- Python 3.12 atau lebih baru
 - pip (Python package manager)
 
 ### Setup
 
 ```bash
-# Clone the repository
+# Clone repositori
 git clone https://github.com/fadhilyk/tugas_akhir.git
 cd tugas_akhir
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Install test dependencies (optional, for development)
+# Install test dependencies (opsional, untuk pengembangan)
 pip install pytest pytest-cov
 ```
 
-## Running the Application
+## Menjalankan Aplikasi
 
 ```bash
 python library_system/main.py
 ```
 
-The CLI will display a login menu. Register a staff account on first run, then use it to log in.
+CLI akan menampilkan menu login. Daftarkan akun staff pada saat pertama kali menjalankan, kemudian gunakan untuk login.
 
-### Default Login
+### Login Default
 
-After running the demo, a default staff account is available:
+Setelah menjalankan demo, akun staff default tersedia:
 
 | Username | Password |
 |---|---|
 | `admin` | `admin123` |
 
-_If this account does not exist yet, you can register a new account from the login menu._
+_Jika akun ini belum ada, Anda dapat mendaftarkan akun baru dari menu login._
 
-## Running Tests
+## Menjalankan Tes
 
 ```bash
-# Run all tests
+# Jalankan semua tes
 pytest
 
-# Run with verbose output
+# Jalankan dengan output verbose
 pytest -v
 
-# Run with coverage report
+# Jalankan dengan laporan coverage
 pytest --cov=library_system
 
-# Run specific test file
+# Jalankan file tes spesifik
 pytest tests/test_auth.py -v
 ```
 
@@ -168,14 +168,14 @@ pytest tests/test_auth.py -v
 Setiap push atau pull request ke branch `main` secara otomatis menjalankan:
 
 1. Python compilation check
-2. Full test suite (128 tests)
+2. Full test suite (128 tes)
 3. Coverage report
 
 Status badge akan muncul di repository setelah workflow pertama dijalankan.
 
 [//]: # (![CI Status]&#40;https://github.com/fadhilyk/tugas_akhir/actions/workflows/python-ci.yml/badge.svg&#41;)
 
-## Project Workflow
+## Alur Proyek
 
 ```mermaid
 sequenceDiagram
@@ -204,7 +204,7 @@ sequenceDiagram
     Service-->>CLI: Loan created
 ```
 
-## Screenshots Placeholder
+## Placeholder Tangkapan Layar
 
 ```
 [Screenshot: Login Menu]
@@ -214,27 +214,27 @@ sequenceDiagram
 [Screenshot: Report Example]
 ```
 
-_Screenshots to be added in future iterations._
+_Tangkapan layar akan ditambahkan di iterasi mendatang._
 
-## Business Rules
+## Aturan Bisnis
 
-- Book can be borrowed if stock > 0
-- Member can borrow max 5 books
-- Loan duration: 7 days
-- Late fine: Rp 2,000/day
-- Book with active loan cannot be borrowed again
+- Buku dapat dipinjam jika stok > 0
+- Anggota maksimal meminjam 5 buku
+- Durasi peminjaman: 7 hari
+- Denda keterlambatan: Rp 2.000/hari
+- Buku dengan pinjaman aktif tidak dapat dipinjam lagi
 
-## Future Improvements
+## Pengembangan Mendatang
 
-- GUI with Tkinter
-- SQLite/PostgreSQL database
-- PDF/Excel report export
-- Barcode/QR Code scanner
-- REST API with FastAPI
+- GUI dengan Tkinter
+- Database SQLite/PostgreSQL
+- Ekspor laporan PDF/Excel
+- Pemindai Barcode/QR Code
+- REST API dengan FastAPI
 - Web Dashboard
 - Role-Based Access Control
-- Multi-user support
+- Dukungan multi-user
 
-## License
+## Lisensi
 
-Academic Project — For Educational Purposes
+Academic Project — Untuk Tujuan Pendidikan
