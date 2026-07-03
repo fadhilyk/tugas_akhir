@@ -7,6 +7,14 @@ Service ini menangani autentikasi dan otorisasi pengguna.
 import hashlib
 from typing import Optional
 from ..models import Petugas
+from ..storage.database import Database
+from ..exceptions import (
+    AuthenticationError,
+    DuplicateIDError,
+    InvalidInputError
+)
+from ..utils.validator import validate_password, validate_non_empty_string
+from ..utils.logger import setup_logger, log_action, log_error
 
 
 class AuthService:
@@ -16,12 +24,21 @@ class AuthService:
     Attributes:
         _petugas_list: List petugas yang terdaftar
         _current_user: Petugas yang sedang login
+        _database: Instance Database untuk persistent storage
+        _logger: Logger instance untuk logging
     """
     
-    def __init__(self) -> None:
-        """Inisialisasi AuthService dengan data kosong."""
-        self._petugas_list: list[Petugas] = []
+    def __init__(self, database: Database = None) -> None:
+        """
+        Inisialisasi AuthService dengan data dari database.
+        
+        Args:
+            database: Instance Database (default: new Database instance)
+        """
+        self._database = database if database else Database()
+        self._petugas_list: list[Petugas] = self._database.load_petugas()
         self._current_user: Optional[Petugas] = None
+        self._logger = setup_logger()
     
     def _hash_password(self, password: str) -> str:
         """
@@ -34,19 +51,6 @@ class AuthService:
             Hash password dalam format hexadecimal
         """
         return hashlib.sha256(password.encode()).hexdigest()
-    
-    def _validate_password(self, password: str) -> None:
-        """
-        Validasi password sesuai requirements.
-        
-        Args:
-            password: Password yang akan divalidasi
-            
-        Raises:
-            ValueError: Jika password tidak memenuhi requirements
-        """
-        if len(password) < 8:
-            raise ValueError("Password minimal 8 karakter")
     
     def _find_petugas_by_username(self, username: str) -> Optional[Petugas]:
         """
@@ -94,28 +98,37 @@ class AuthService:
             Object Petugas yang baru dibuat
             
         Raises:
-            ValueError: Jika ID atau username duplikat, atau password invalid
+            DuplicateIDError: Jika ID atau username sudah digunakan
+            InvalidInputError: Jika password tidak memenuhi requirements
         """
-        if self._find_petugas_by_id(id):
-            raise ValueError(f"ID petugas '{id}' sudah terdaftar")
-        
-        if self._find_petugas_by_username(username):
-            raise ValueError(f"Username '{username}' sudah digunakan")
-        
-        self._validate_password(password)
-        
-        password_hash = self._hash_password(password)
-        
-        petugas = Petugas(
-            id=id,
-            nama=nama,
-            kontak=kontak,
-            username=username,
-            password_hash=password_hash
-        )
-        
-        self._petugas_list.append(petugas)
-        return petugas
+        try:
+            if self._find_petugas_by_id(id):
+                raise DuplicateIDError(f"ID petugas '{id}' sudah terdaftar")
+            
+            if self._find_petugas_by_username(username):
+                raise DuplicateIDError(f"Username '{username}' sudah digunakan")
+            
+            validate_password(password)
+            
+            password_hash = self._hash_password(password)
+            
+            petugas = Petugas(
+                id=id,
+                nama=nama,
+                kontak=kontak,
+                username=username,
+                password_hash=password_hash
+            )
+            
+            self._petugas_list.append(petugas)
+            self._database.save_petugas(self._petugas_list)
+            
+            log_action(self._logger, "REGISTER_STAFF", f"Staff registered: {nama} (username: {username})")
+            
+            return petugas
+        except Exception as e:
+            log_error(self._logger, e, "register_petugas")
+            raise
     
     def login(self, username: str, password: str) -> Petugas:
         """
@@ -129,32 +142,45 @@ class AuthService:
             Object Petugas yang berhasil login
             
         Raises:
-            ValueError: Jika username tidak ditemukan atau password salah
+            AuthenticationError: Jika username tidak ditemukan atau password salah
         """
-        petugas = self._find_petugas_by_username(username)
-        
-        if not petugas:
-            raise ValueError("Username tidak ditemukan")
-        
-        password_hash = self._hash_password(password)
-        
-        if petugas.password_hash != password_hash:
-            raise ValueError("Password salah")
-        
-        self._current_user = petugas
-        return petugas
+        try:
+            validate_non_empty_string(username, "Username")
+            validate_non_empty_string(password, "Password")
+            
+            petugas = self._find_petugas_by_username(username)
+            
+            if not petugas:
+                raise AuthenticationError("Username tidak ditemukan")
+            
+            password_hash = self._hash_password(password)
+            
+            if petugas.password_hash != password_hash:
+                raise AuthenticationError("Password salah")
+            
+            self._current_user = petugas
+            
+            log_action(self._logger, "LOGIN", f"Login successful", user=username)
+            
+            return petugas
+        except Exception as e:
+            log_error(self._logger, e, f"login attempt for username: {username}")
+            raise
     
     def logout(self) -> None:
         """
         Logout petugas dari sistem.
         
         Raises:
-            ValueError: Jika tidak ada user yang sedang login
+            AuthenticationError: Jika tidak ada user yang sedang login
         """
         if not self._current_user:
-            raise ValueError("Tidak ada user yang sedang login")
+            raise AuthenticationError("Tidak ada user yang sedang login")
         
+        username = self._current_user.username
         self._current_user = None
+        
+        log_action(self._logger, "LOGOUT", f"Logout successful", user=username)
     
     def get_current_user(self) -> Optional[Petugas]:
         """

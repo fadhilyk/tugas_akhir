@@ -1,1 +1,29 @@
-[]
+[
+  {
+    "id": "B001",
+    "judul": "Python Programming",
+    "penulis": "John Doe",
+    "penerbit": "Tech Publisher",
+    "tahun": 2023,
+    "kategori": "Programming",
+    "stok": 5
+  },
+  {
+    "id": "B002",
+    "judul": "Data Structures",
+    "penulis": "Jane Smith",
+    "penerbit": "CS Books",
+    "tahun": 2022,
+    "kategori": "Computer Science",
+    "stok": 2
+  },
+  {
+    "id": "B003",
+    "judul": "Web Development",
+    "penulis": "Bob Wilson",
+    "penerbit": "Web Press",
+    "tahun": 2024,
+    "kategori": "Web",
+    "stok": 3
+  }
+]
