@@ -202,10 +202,14 @@ class TestCLIWorkflow:
     
     @pytest.fixture(autouse=True)
     def setup_method(self):
-        """Clean default data directory before each test."""
+        """Clean default data directory before and after each test."""
         import json
         from pathlib import Path
         data_dir = Path("library_system/data")
+        if data_dir.exists():
+            for file in data_dir.glob("*.json"):
+                file.write_text("[]")
+        yield
         if data_dir.exists():
             for file in data_dir.glob("*.json"):
                 file.write_text("[]")
